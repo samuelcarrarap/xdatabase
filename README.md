@@ -1,47 +1,27 @@
-# xml2json
-PHP class that converts json to XML.
+# xdatatabase
+PHP class that interacts with mysql database using PDO.
 
 **BASIC USAGE**
 ````php
-require_once('XML2Json.class.php');
+require_once('Database.class.php');
 
-$xml = '<books><title>The Chronicles of Narnia</title><title>The Chronicles of Narnia</title></books>';
+$db = new Database();
 
-$xml2json = new Json2XML();
-
-$json = $xml2json->convert($xml);
-
-echo $json;
+$db->base = "cms";
+$db->query = "SELECT * FROM users WHERE id = ?";
+$users = $db->select();
 ````
 
 **RESULT**
-````json
-{"books":{"title":["The Chronicles of Narnia","The Chronicles of Narnia"]}}
+````
+[{"id":1,"name":"Luke","id":2,"name":"Nate"}]
 ````
 
 ------------------------------------------------------------------------------------------------------
 
-**USAGE WITH PRETTIFY**
+**ENABLE DEBUG**
 ````php
-require_once('XML2Json.class.php');
-
-$xml = '<books><title>The Chronicles of Narnia</title><title>The Chronicles of Narnia</title></books>';
-
-$xml2json = new Json2XML(true);
-
-$json = $xml2json->convert($xml);
-
-echo $json;
+$db = new Database(true);
 ````
 
-**RESULT WITH PRETTIFY**
-````json
-{
-    "books": {
-        "title": [
-            "The Chronicles of Narnia",
-            "The Chronicles of Narnia"
-        ]
-    }
-}
-````
+------------------------------------------------------------------------------------------------------

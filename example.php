@@ -1,10 +1,11 @@
 <?php
-    header('Content-Type: application/json; charset=utf-8');
+    require_once('Database.class.php');
+    $db = new Database(true);
 
-    require_once('XML2Json.class.php');
+    $id = 1;
 
-    $xml = '<books><title>The Chronicles of Narnia</title><title>The Chronicles of Narnia</title></books>';
-    $xml2json = new XML2Json();
-    $json = $xml2json->convert($xml);
-    echo $json;
+    $db->base = "cms";
+    $db->query = "SELECT * FROM users WHERE id = ?";
+    $db->content = [[$id, 'int']];
+    $user = $db->selectOne();
 ?>
